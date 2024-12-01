@@ -66,6 +66,9 @@ public class BallController : MonoBehaviour
                 }
 
                 Destroy(nearbyColorSource.gameObject); // Optional: Remove color source
+
+                // Increment score
+                GameManager.Instance.UpdateScore(5);
             }
         }
     }
@@ -112,6 +115,14 @@ public class BallController : MonoBehaviour
         {
             Debug.LogError("Failed to change color: " + color);
         }
+    }
+    public string GetCurrentColor()
+    {
+        if (collectedColors.Count > 0 && currentColorIndex >= 0 && currentColorIndex < collectedColors.Count)
+        {
+            return collectedColors[currentColorIndex];
+        }
+        return null; // Default to no color if no colors are collected
     }
 
     private void ResetToDefaultColor()

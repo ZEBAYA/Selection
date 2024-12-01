@@ -3,18 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class NextLevelTrigger : MonoBehaviour
 {
-    public string mainMenuSceneName = "Main Menu"; // Name of the main menu scene
+    public string winSceneName = "Win"; // Name of the win scene
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player")) // Ensure only the player can trigger
         {
             Debug.Log("Player reached the end of the level!");
-            LoadNextLevelOrMainMenu();
+            LoadNextLevelOrWinScene();
         }
     }
 
-    private void LoadNextLevelOrMainMenu()
+    private void LoadNextLevelOrWinScene()
     {
         // Get the current scene index
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
@@ -27,9 +27,9 @@ public class NextLevelTrigger : MonoBehaviour
         }
         else
         {
-            // If this is the last level, transition to the main menu
-            Debug.Log("All levels completed. Returning to main menu.");
-            SceneManager.LoadScene(mainMenuSceneName);
+            // If this is the last level, transition to the win scene
+            Debug.Log("All levels completed. Loading Win Scene.");
+            SceneManager.LoadScene(winSceneName);
         }
     }
 }

@@ -37,7 +37,8 @@ public class ColorObstacle : MonoBehaviour
 
             if (ballController != null)
             {
-                if (ballController.collectedColors.Contains(requiredColor))
+                // Check if the player is actively displaying the required color
+                if (ballController.GetCurrentColor() == requiredColor)
                 {
                     float delay = isHorizontal ? horizontalDelay : verticalDelay; // Choose delay based on orientation
                     StartCoroutine(HandleInteractionWithDelay(ballController, delay));
@@ -50,6 +51,7 @@ public class ColorObstacle : MonoBehaviour
                 else
                 {
                     Debug.LogWarning($"The player does not have the required color ({requiredColor}) to unlock this obstacle!");
+                    GameManager.Instance.UpdateScore(-3); // Decrement score
                 }
             }
         }
